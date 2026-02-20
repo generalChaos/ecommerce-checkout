@@ -132,6 +132,10 @@ Error scenarios are comprehensively tested:
 - **Non-PaymentError exceptions**: Generic errors during payment (500)
 - **Internal errors (500)**: Unexpected DynamoDB failures, unhandled exceptions
 
+## Manual Testing with cURL
+
+For comprehensive curl examples and manual API testing, see [CURL_TESTING.md](./CURL_TESTING.md).
+
 ## Integration Testing (Optional)
 
 ### Using LocalStack

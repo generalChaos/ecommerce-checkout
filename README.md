@@ -134,7 +134,8 @@ Tests are organized to map directly to acceptance criteria:
 | Returns 402 on payment failure | AC-7: Payment failure handled |
 | Conditional check handles race condition | AC-8: No duplicate orders |
 
-For detailed testing instructions, see [TESTING.md](docs/TESTING.md).
+For detailed testing instructions, see [TESTING.md](docs/TESTING.md).  
+For manual API testing with curl examples, see [CURL_TESTING.md](docs/CURL_TESTING.md).
 
 Run with coverage:
 

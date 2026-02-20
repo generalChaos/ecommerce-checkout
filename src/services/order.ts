@@ -20,7 +20,24 @@ let docClient: DynamoDBDocumentClient;
 
 export function getDocClient(): DynamoDBDocumentClient {
   if (!docClient) {
-    const client = new DynamoDBClient({});
+    const clientConfig: any = {
+      region: process.env.AWS_DEFAULT_REGION || process.env.AWS_REGION || "us-east-1",
+    };
+    // Support LocalStack for local testing
+    if (process.env.AWS_ENDPOINT_URL) {
+      clientConfig.endpoint = process.env.AWS_ENDPOINT_URL;
+      // LocalStack requires credentials - must be explicitly set
+      if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+        throw new Error(
+          "AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY must be set when using LocalStack (AWS_ENDPOINT_URL)"
+        );
+      }
+      clientConfig.credentials = {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      };
+    }
+    const client = new DynamoDBClient(clientConfig);
     docClient = DynamoDBDocumentClient.from(client, {
       marshallOptions: { removeUndefinedValues: true },
     });
